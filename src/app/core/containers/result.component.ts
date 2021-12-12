@@ -9,5 +9,7 @@ import { ApiService } from '../services/api.service';
 export class ResultComponent implements OnInit {
   constructor(private service: ApiService) {}
 
+  result$ = this.service.getResult();
+
   ngOnInit(): void {}
 }

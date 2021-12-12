@@ -1,0 +1,47 @@
+.centerize {
+  text-align: center;
+}
+
+.larger {
+  font-size: 1.5em;
+}
+
+input[type="text"] {
+  background: transparent;
+  outline: 0;
+  border: 0;
+  line-height: 1em;
+  padding: 0 0.3em;
+  min-width: 0;
+  max-width: 4em;
+  color: inherit;
+  font-size: inherit;
+  font-family: inherit;
+  border-bottom: 2px solid currentColor;
+  text-align: center;
+}
+
+input[type="radio"] {
+  display: none;
+  & + span {
+    padding: 0 0.2em;
+    cursor: pointer;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+  }
+  &:checked + span {
+    color: yellow;
+    &::before {
+      content: "";
+      display: inline-block;
+      height: 1em;
+      width: 1em;
+      background: transparent url(../../../assets/images/red_heart.svg)
+        no-repeat center;
+      background-size: 15px 15px;
+      margin-right: 0.25em;
+      vertical-align: middle;
+    }
+  }
+}

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import * as tf from '@tensorflow/tfjs';
 import BigNumber from 'bignumber.js';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
-import { filter, map, switchMap } from 'rxjs/operators';
+import { filter, map, switchMap, tap } from 'rxjs/operators';
 import { FormBody } from '../models/api.model';
 
 /** 평균값 */
@@ -32,8 +32,18 @@ export class ApiService {
     this.isModelReady$.next(true);
   }
 
+  private body: FormBody | undefined;
+  setBody(body: FormBody) {
+    this.body = body;
+    console.log(this.body);
+    return Promise.resolve();
+  }
   /** predict */
-  getResult(body: FormBody): Observable<string> {
+  getResult(): Observable<string> {
+    if (!this.body) {
+      return throwError('body not found');
+    }
+    const body = this.body;
     return this.isModelReady$.pipe(
       filter((x) => x === true),
       map(() => {
@@ -49,6 +59,7 @@ export class ApiService {
           body.bmi,
           body.smoking,
         ];
+        console.log(array);
         const input = array.map((value, index) =>
           new BigNumber(value)
             .minus(mean[index])
@@ -56,11 +67,14 @@ export class ApiService {
             .dp(8, BigNumber.ROUND_FLOOR)
             .toNumber()
         );
-        console.log(array);
+        console.log(input);
         const predict = this.model.predict(tf.tensor2d([input])) as tf.Tensor;
         return new BigNumber(predict.dataSync()[0]).toString(10);
       }),
-      switchMap((result) => (result === 'NaN' ? throwError('NaN') : of(result)))
+      switchMap((result) =>
+        result === 'NaN' ? throwError('NaN') : of(result)
+      ),
+      tap((x) => console.log(x))
     );
   }
 }

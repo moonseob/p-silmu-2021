@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import BigNumber from 'bignumber.js';
-import { Observable } from 'rxjs';
 import { ApiService } from '../services/api.service';
 
 @Component({
@@ -9,20 +9,33 @@ import { ApiService } from '../services/api.service';
   templateUrl: './questions.component.html',
   styleUrls: ['./questions.component.scss'],
 })
-export class QuestionsComponent implements OnInit {
-  constructor(private fb: FormBuilder, private service: ApiService) {}
+export class QuestionsComponent {
+  constructor(
+    private fb: FormBuilder,
+    private service: ApiService,
+    private router: Router
+  ) {}
 
   private group = {
-    gender: [0],
-    age: [''],
-    hypertension: [0],
-    heartDisease: [0],
-    married: [0],
-    work: [0],
-    liveIn: [0],
-    height: [''],
-    weight: [''],
-    smoking: [0],
+    gender: [null, Validators.required],
+    age: [
+      null,
+      [Validators.required, Validators.pattern(/^\d{2,3}(\.\d{1,2})?$/)],
+    ],
+    hypertension: [null, Validators.required],
+    heartDisease: [null, Validators.required],
+    married: [null, Validators.required],
+    work: [null, Validators.required],
+    liveIn: [null, Validators.required],
+    height: [
+      null,
+      [Validators.required, Validators.pattern(/^\d{2,3}(\.\d{1,2})?$/)],
+    ],
+    weight: [
+      null,
+      [Validators.required, Validators.pattern(/^\d{2,3}(\.\d{1,2})?$/)],
+    ],
+    smoking: [null, Validators.required],
   };
 
   public formGroup = this.fb.group(this.group);
@@ -40,7 +53,12 @@ export class QuestionsComponent implements OnInit {
   ];
   public currentStep = 0;
 
-  result$: Observable<string> | undefined;
+  prev() {
+    this.currentStep--;
+  }
+  next() {
+    this.currentStep++;
+  }
   submit() {
     const { value, invalid } = this.formGroup;
     const bmi = new BigNumber(+value.weight)
@@ -53,10 +71,8 @@ export class QuestionsComponent implements OnInit {
       age: +value.age,
       bmi,
     };
-    this.result$ = this.service.getResult(body);
-  }
-
-  ngOnInit(): void {
-    console.log(this.formGroup);
+    this.service.setBody(body).then(() => {
+      this.router.navigate(['/', 'result']);
+    });
   }
 }

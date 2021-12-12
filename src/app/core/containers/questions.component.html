@@ -1,115 +1,172 @@
-<section class="actions">
-  <a class="action" routerLink="/result">
-    <span>결과화면으로 건너뛰기</span>
-  </a>
-</section>
-<form [formGroup]="formGroup" (ngSubmit)="submit()">
-  <div>
-    <h3>성별</h3>
-    <label>
-      <input type="radio" name="gender" formControlName="gender" [value]="0">
-      <span>여성</span>
-    </label>
-    <label>
-      <input type="radio" name="gender" formControlName="gender" [value]="1">
-      <span>남성</span>
-    </label>
-  </div>
-  <div>
-    <h3>나이</h3>
-    <input type="text" formControlName="age">
-  </div>
-  <div>
-    <h3>키</h3>
-    <input type="text" formControlName="height">
-  </div>
-  <div>
-    <h3>몸무게</h3>
-    <input type="text" formControlName="weight">
-  </div>
-  <div>
-    <h3>고혈압</h3>
-    <label>
-      <input type="radio" name="hypertension" formControlName="hypertension" [value]="0">
-      <span>없음</span>
-    </label>
-    <label>
-      <input type="radio" name="hypertension" formControlName="hypertension" [value]="1">
-      <span>있음</span>
-    </label>
-  </div>
-  <div>
-    <h3>심장 질환</h3>
-    <label>
-      <input type="radio" name="heartDisease" formControlName="heartDisease" [value]="0">
-      <span>없음</span>
-    </label>
-    <label>
-      <input type="radio" name="heartDisease" formControlName="heartDisease" [value]="1">
-      <span>있음</span>
-    </label>
-  </div>
-  <div>
-    <h3>결혼 유무</h3>
-    <label>
-      <input type="radio" name="married" formControlName="married" [value]="0">
-      <span>기혼</span>
-    </label>
-    <label>
-      <input type="radio" name="married" formControlName="married" [value]="1">
-      <span>미혼</span>
-    </label>
-  </div>
-  <div>
-    <h3>고용 형태</h3>
-    <label>
-      <input type="radio" name="work" formControlName="work" [value]="0">
-      <span>사기업</span>
-    </label>
-    <label>
-      <input type="radio" name="work" formControlName="work" [value]="1">
-      <span>자영업</span>
-    </label>
-    <label>
-      <input type="radio" name="work" formControlName="work" [value]="2">
-      <span>어린이</span>
-    </label>
-    <label>
-      <input type="radio" name="work" formControlName="work" [value]="3">
-      <span>공공기관</span>
-    </label>
-    <label>
-      <input type="radio" name="work" formControlName="work" [value]="4">
-      <span>무직</span>
-    </label>
-  </div>
-  <div>
-    <h3>주거 타입</h3>
-    <label>
-      <input type="radio" name="liveIn" formControlName="liveIn" [value]="0">
-      <span>도심</span>
-    </label>
-    <label>
-      <input type="radio" name="liveIn" formControlName="liveIn" [value]="1">
-      <span>시골</span>
-    </label>
-  </div>
-  <div>
-    <h3>흡연 형태</h3>
-    <label>
-      <input type="radio" name="smoking" formControlName="smoking" [value]="0">
-      <span>흡연 경험 없음</span>
-    </label>
-    <label>
-      <input type="radio" name="smoking" formControlName="smoking" [value]="1">
-      <span>금연중</span>
-    </label>
-    <label>
-      <input type="radio" name="smoking" formControlName="smoking" [value]="2">
-      <span>흡연중</span>
-    </label>
-  </div>
-  <button type="submit">완료</button>
-</form>
-
-<p *ngIf="result$ | async as result">result: {{ result | percent:'.0-2' }}</p>
+<main [ngSwitch]="steps[currentStep]">
+  <section class="graphics">
+    <img src="assets/images/reaper.png">
+    <div class="bubble">
+      <span textSeq [delay]="0" [interval]="60" *ngSwitchCase="'gender'">성별을 알려주세요.</span>
+      <span textSeq [delay]="0" [interval]="60" *ngSwitchCase="'height'">키를 알려주세요.</span>
+      <span textSeq [delay]="0" [interval]="60" *ngSwitchCase="'weight'">체중을 알려주세요.</span>
+      <span textSeq [delay]="0" [interval]="60" *ngSwitchCase="'age'">나이를 알려주세요.</span>
+      <span textSeq [delay]="0" [interval]="60" *ngSwitchCase="'liveIn'">거주 형태를 알려주세요.</span>
+      <span textSeq [delay]="0" [interval]="60" *ngSwitchCase="'smoking'">흡연 여부를 알려주세요.</span>
+      <span textSeq [delay]="0" [interval]="60" *ngSwitchCase="'married'">결혼 여부를 알려주세요.</span>
+      <span textSeq [delay]="0" [interval]="60" *ngSwitchCase="'work'">어떤 일을 하시나요?</span>
+      <span textSeq [delay]="0" [interval]="60" *ngSwitchCase="'hypertension'">고혈압을 앓은 적이 있나요?</span>
+      <span textSeq [delay]="0" [interval]="60" *ngSwitchCase="'heartDisease'">심장병을 앓은 적이 있나요?</span>
+    </div>
+  </section>
+  <form [formGroup]="formGroup" (ngSubmit)="$event.preventDefault()">
+    <section class="text-box">
+      <div class="centerize larger">
+        <ng-container *ngSwitchCase="'height'">
+          <input type="text" formControlName="height"> cm
+        </ng-container>
+        <ng-container *ngSwitchCase="'weight'">
+          <input type="text" formControlName="weight"> kg
+        </ng-container>
+        <ng-container *ngSwitchCase="'age'">
+          <input type="text" formControlName="age"> 세
+        </ng-container>
+      </div>
+      <ul>
+        <ng-container *ngSwitchCase="'gender'">
+          <li>
+            <label>
+              <input type="radio" name="gender" formControlName="gender" [value]="0">
+              <span>여성</span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="gender" formControlName="gender" [value]="1">
+              <span>남성</span>
+            </label>
+          </li>
+        </ng-container>
+        <ng-container *ngSwitchCase="'liveIn'">
+          <li>
+            <label>
+              <input type="radio" name="liveIn" formControlName="liveIn" [value]="0">
+              <span>도심</span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="liveIn" formControlName="liveIn" [value]="1">
+              <span>지방</span>
+            </label>
+          </li>
+        </ng-container>
+        <ng-container *ngSwitchCase="'smoking'">
+          <li>
+            <label>
+              <input type="radio" name="smoking" formControlName="smoking" [value]="0">
+              <span>흡연 경험 없음</span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="smoking" formControlName="smoking" [value]="1">
+              <span>금연중</span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="smoking" formControlName="smoking" [value]="2">
+              <span>흡연중</span>
+            </label>
+          </li>
+        </ng-container>
+        <ng-container *ngSwitchCase="'married'">
+          <li>
+            <label>
+              <input type="radio" name="married" formControlName="married" [value]="0">
+              <span>기혼</span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="married" formControlName="married" [value]="1">
+              <span>미혼</span>
+            </label>
+          </li>
+        </ng-container>
+        <ng-container *ngSwitchCase="'work'">
+          <li>
+            <label>
+              <input type="radio" name="work" formControlName="work" [value]="0">
+              <span>일반 기업</span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="work" formControlName="work" [value]="1">
+              <span>자영업</span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="work" formControlName="work" [value]="3">
+              <span>공기관</span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="work" formControlName="work" [value]="4">
+              <span>무직</span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="work" formControlName="work" [value]="2">
+              <span>어린이</span>
+            </label>
+          </li>
+        </ng-container>
+        <ng-container *ngSwitchCase="'hypertension'">
+          <li>
+            <label>
+              <input type="radio" name="hypertension" formControlName="hypertension" [value]="0">
+              <span>없음</span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="hypertension" formControlName="hypertension" [value]="1">
+              <span>있음</span>
+            </label>
+          </li>
+        </ng-container>
+        <ng-container *ngSwitchCase="'heartDisease'">
+          <li>
+            <label>
+              <input type="radio" name="heartDisease" formControlName="heartDisease" [value]="0">
+              <span>없음</span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="heartDisease" formControlName="heartDisease" [value]="1">
+              <span>있음</span>
+            </label>
+          </li>
+        </ng-container>
+      </ul>
+    </section>
+  </form>
+  <section class="actions">
+    <button type="button" class="action" (click)="prev()" *ngIf="currentStep > 0">
+      <i class="fas fa-arrow-left"></i>
+      <span>이전</span>
+    </button>
+    <ng-container [ngSwitch]="steps.length - 1 === currentStep">
+      <button type="submit" class="action" (click)="submit()" *ngSwitchCase="true">
+        <i class="fas fa-check"></i>
+        <span>완료</span>
+      </button>
+      <button type="button" class="action" (click)="next()" [disabled]="!(formGroup.get(steps[currentStep])?.valid)" *ngSwitchDefault>
+        <i class="fas fa-arrow-right"></i>
+        <span>다음</span>
+      </button>
+    </ng-container>
+  </section>
+</main>

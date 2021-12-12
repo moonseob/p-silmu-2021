@@ -3,7 +3,7 @@
     <img src="assets/images/reaper.png">
     <div class="bubble">
       <span><i class="fas fa-check-circle"></i> 정상</span>
-      <br><span textSeq [delay]="200" [interval]="60">당신은 정상적인 삶을 살 수 있습니다.</span>
+      <br><span *ngIf="result$ | async as result">당신의 생존 확률: {{ result | percent: '.0-2' }}</span>
     </div>
   </section>
   <section class="text-box">
@@ -18,7 +18,7 @@
       <i class="fas fa-lightbulb"></i>
       <span>건강 조언 보기</span>
     </a>
-    <a class="action" routerLink="">
+    <a class="action" routerLink="/">
       <i class="fas fa-undo-alt"></i>
       <span>처음으로</span>
     </a>
