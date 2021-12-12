@@ -1,6 +1,9 @@
 :host {
+  display: block;
+  margin-bottom: 50px;
+}
+
+::ng-deep router-outlet + * {
+  display: block;
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
