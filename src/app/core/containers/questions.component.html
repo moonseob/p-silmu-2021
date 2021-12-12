@@ -1,0 +1,103 @@
+<form [formGroup]="formGroup" (ngSubmit)="submit()">
+
+  <div>
+    <h3>성별</h3>
+    <label>
+      <input type="radio" name="gender" formControlName="gender" [value]="0">
+      <span>여성</span>
+    </label>
+    <label>
+      <input type="radio" name="gender" formControlName="gender" [value]="1">
+      <span>남성</span>
+    </label>
+  </div>
+  <div>
+    <h3>나이</h3>
+    <input type="text" formControlName="age">
+  </div>
+  <div>
+    <h3>고혈압</h3>
+    <label>
+      <input type="radio" name="hypertension" formControlName="hypertension" [value]="0">
+      <span>없음</span>
+    </label>
+    <label>
+      <input type="radio" name="hypertension" formControlName="hypertension" [value]="1">
+      <span>있음</span>
+    </label>
+  </div>
+  <div>
+    <h3>심장 질환</h3>
+    <label>
+      <input type="radio" name="heartDisease" formControlName="heartDisease" [value]="0">
+      <span>없음</span>
+    </label>
+    <label>
+      <input type="radio" name="heartDisease" formControlName="heartDisease" [value]="1">
+      <span>있음</span>
+    </label>
+  </div>
+  <div>
+    <h3>결혼 유무</h3>
+    <label>
+      <input type="radio" name="married" formControlName="married" [value]="0">
+      <span>기혼</span>
+    </label>
+    <label>
+      <input type="radio" name="married" formControlName="married" [value]="1">
+      <span>미혼</span>
+    </label>
+  </div>
+  <div>
+    <h3>고용 형태</h3>
+    <label>
+      <input type="radio" name="work" formControlName="work" [value]="0">
+      <span>사기업</span>
+    </label>
+    <label>
+      <input type="radio" name="work" formControlName="work" [value]="1">
+      <span>자영업</span>
+    </label>
+    <label>
+      <input type="radio" name="work" formControlName="work" [value]="2">
+      <span>어린이</span>
+    </label>
+    <label>
+      <input type="radio" name="work" formControlName="work" [value]="3">
+      <span>공공기관</span>
+    </label>
+    <label>
+      <input type="radio" name="work" formControlName="work" [value]="4">
+      <span>무직</span>
+    </label>
+  </div>
+  <div>
+    <h3>주거 타입</h3>
+    <label>
+      <input type="radio" name="liveIn" formControlName="liveIn" [value]="0">
+      <span>도심</span>
+    </label>
+    <label>
+      <input type="radio" name="liveIn" formControlName="liveIn" [value]="1">
+      <span>시골</span>
+    </label>
+  </div>
+  <div>
+    <h3>흡연 형태</h3>
+    <label>
+      <input type="radio" name="smoking" formControlName="smoking" [value]="0">
+      <span>흡연 경험 없음</span>
+    </label>
+    <label>
+      <input type="radio" name="smoking" formControlName="smoking" [value]="1">
+      <span>금연중</span>
+    </label>
+    <label>
+      <input type="radio" name="smoking" formControlName="smoking" [value]="2">
+      <span>흡연중</span>
+    </label>
+  </div>
+  <button type="submit">완료</button>
+</form>
+
+<p *ngIf="result$ | async as result">result: {{ result | percent:'.0-2' }}</p>
