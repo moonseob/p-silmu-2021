@@ -1,33 +1,34 @@
-export enum Gender {
+enum Gender {
   Female = 0,
   Male,
 }
-export type Age = number;
+type Age = number;
 /** 고혈압 */
-export enum Hypertension {
+enum Hypertension {
   No = 0,
   Yes,
 }
-export enum HeartDisease {
+enum HeartDisease {
   No = 0,
   Yes,
 }
-export enum Married {
+enum Married {
   No = 0,
   Yes,
 }
-export enum Work {
+enum Work {
   Private = 0,
   SelfEmployed,
   Children,
   GovtJob,
   NeverWorked,
 }
-export enum LiveIn {
+enum LiveIn {
   Urban = 0,
   Rural,
 }
-export enum Smoking {
+type Bmi = number;
+enum Smoking {
   NeverSmoked = 0,
   FormerlySmoked,
   Smokes,
@@ -40,5 +41,6 @@ export interface FormBody {
   married: Married;
   work: Work;
   liveIn: LiveIn;
+  bmi: Bmi;
   smoking: Smoking;
 }
