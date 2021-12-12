@@ -1,1 +1,111 @@
 /* You can add global styles to this file, and also import other style files */
+/* Neo둥근모 */
+@import url("//cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@1.521/neodgm/style.css");
+
+$bg: black;
+$text: white;
+
+html {
+  font-size: 30px;
+}
+
+body {
+  font-family: "NeoDunggeunmo";
+  background-color: $bg;
+  color: $text;
+  height: 100vh;
+  margin: 0;
+}
+
+main {
+  width: 600px;
+  max-width: 100%;
+}
+
+ul,
+p {
+  margin: 0;
+}
+
+.graphics {
+  display: flex;
+  position: relative;
+  img {
+    margin: auto;
+  }
+}
+
+.bubble {
+  position: absolute;
+  top: 0;
+  right: -5em;
+  width: 10em;
+  min-height: 4em;
+  // border: 2px solid black;
+  background-color: white;
+  color: black;
+  font-size: 0.7em;
+  padding: 0.6em;
+  border-radius: 1em;
+  &::before {
+    content: "";
+    position: absolute;
+    right: 100%;
+    top: calc(50% - 10px);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 30px 10px 0;
+    border-color: transparent white transparent transparent;
+  }
+}
+
+.text-box {
+  border: 5px solid $text;
+  background-color: $bg;
+  line-height: 1;
+  padding: 0.8em 1em;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 6em;
+  ul {
+    padding-left: 1em;
+    margin-left: -0.5em;
+    list-style-type: "* ";
+  }
+}
+
+.actions {
+  display: flex;
+  margin-top: 1em;
+  justify-content: flex-start;
+  align-items: center;
+  .action {
+    white-space: nowrap;
+    flex: 1 0 20%;
+    color: orange;
+    border: 2px solid currentColor;
+    outline: 0;
+    margin: 0;
+    text-align: center;
+    font-size: 1.2em;
+    padding: 0.05em 0.2em;
+    box-sizing: border-box;
+    cursor: pointer;
+    text-decoration: none;
+    i {
+      font-size: 0.8em;
+      &::after {
+        content: " ";
+        white-space: pre;
+      }
+    }
+    &:focus,
+    &:hover {
+      color: yellow;
+    }
+  }
+  .action ~ .action {
+    margin-left: calc(20% / 3);
+  }
+}
