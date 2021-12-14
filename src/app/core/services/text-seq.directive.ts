@@ -15,7 +15,7 @@ export class TextSeqDirective implements OnInit {
   constructor(private elref: ElementRef) {
     this.el = this.elref.nativeElement;
   }
-  @Input() interval = 100; // ms
+  @Input() interval = 80; // ms
   @Input() delay = 0;
   @HostBinding('style.display') display?: string;
   el!: HTMLElement;
