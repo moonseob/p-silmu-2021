@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { CountUpModule } from 'ngx-countup';
 import { SwiperModule } from 'swiper/angular';
 import { TipsComponent } from './components/tips.component';
 import { IntroComponent } from './containers/intro.component';
@@ -19,6 +20,7 @@ import { TextSeqDirective } from './services/text-seq.directive';
   ],
   imports: [
     CommonModule,
+    CountUpModule,
     FormsModule,
     ReactiveFormsModule,
     SwiperModule,

@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import BigNumber from 'bignumber.js';
-import { ApiService } from '../services/api.service';
+import { ApiService, getBmi } from '../services/api.service';
 
 @Component({
   selector: 'app-questions',
@@ -61,18 +60,13 @@ export class QuestionsComponent {
   }
   submit() {
     const { value, invalid } = this.formGroup;
-    const bmi = new BigNumber(+value.weight)
-      .div(new BigNumber(+value.height).div(100).pow(2))
-      .dp(2)
-      .toNumber();
-    console.log('bmi: ', bmi);
+    this.service.setBody(value).then(() => {
+      this.router.navigate(['/', 'result']);
+    });
+    const bmi = getBmi(+value.height, +value.weight);
     const body = {
       ...value,
       age: +value.age,
-      bmi,
     };
-    this.service.setBody(body).then(() => {
-      this.router.navigate(['/', 'result']);
-    });
   }
 }

@@ -33,7 +33,8 @@ enum Smoking {
   FormerlySmoked,
   Smokes,
 }
-export interface FormBody {
+
+export interface ParamterBase {
   gender: Gender;
   age: Age;
   hypertension: Hypertension;
@@ -41,6 +42,13 @@ export interface FormBody {
   married: Married;
   work: Work;
   liveIn: LiveIn;
-  bmi: Bmi;
   smoking: Smoking;
+}
+export interface FormBody extends ParamterBase {
+  weight: number;
+  height: number;
+}
+
+export interface FormBodyBmi extends ParamterBase {
+  bmi: number;
 }

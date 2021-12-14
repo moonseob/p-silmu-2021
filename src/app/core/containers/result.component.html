@@ -1,15 +1,38 @@
-<main>
+<main *ngIf="(asis$ | async) as asis" [ngSwitch]="asis.severity">
   <section class="graphics">
     <img src="assets/images/reaper.png">
-    <div class="bubble">
-      <span><i class="fas fa-check-circle"></i> 정상</span>
-      <br><span *ngIf="result$ | async as result">당신의 생존 확률: {{ result | percent: '.0-2' }}</span>
+    <div class="bubble left align-center">
+      <div class="status-icon" [ngClass]="'severity-' + asis.severity">
+        <i class="fas fa-check-circle" *ngSwitchCase="0"></i>
+        <i class="fas fa-exclamation-triangle" *ngSwitchCase="1"></i>
+        <i class="fas fa-skull-crossbones" *ngSwitchCase="2"></i>
+      </div>
+      <p [ngClass]="'severity-' + asis.severity">
+        <ng-container *ngSwitchCase="0">정상</ng-container>
+        <ng-container *ngSwitchCase="1">주의</ng-container>
+        <ng-container *ngSwitchCase="2">경고</ng-container>
+      </p>
+      <br>
+      <p textSeq [delay]="0" [interval]="60">당신의 심장마비 발병 확률:</p>
+      <p class="larger-font">{{ asis.probability| percent: '.0-2' }}</p>
+    </div>
+    <div class="bubble align-center">
+      <p textSeq [delay]="0" [interval]="60">이대로 간다면...</p>
+      <br>
+      <p *ngIf="in10yrs$ | async as f">10년 뒤 <span class="larger-font">{{ f.probability | percent: '.0-2' }}</span></p>
+      <p *ngIf="in20yrs$ | async as f">20년 뒤 <span class="larger-font">{{ f.probability | percent: '.0-2' }}</span></p>
     </div>
   </section>
   <section class="text-box">
     <ul>
-      <li textSeq>
+      <li textSeq *ngSwitchCase="0">
         이대로 운동과 일의 삶에서 밸런스를 찾으세요. 추후에 위험 단계로 가지 않기 위해서 지속적으로 유지하셔야 합니다.
+      </li>
+      <li textSeq *ngSwitchCase="1">
+        당신의 건강은 주의가 필요합니다. 지속적인 운동을 하고, 나트륨 섭취를 낮춰야하며, 금연과 절주가 필요합니다.
+      </li>
+      <li textSeq *ngSwitchCase="2">
+        당신의 건강은 현재 경고 단계 입니다. 필수적으로 운동을 하고, 나트륨 섭취를 낮춰야하며, 금연과 절주를 지금 즉시 하셔야 합니다.
       </li>
     </ul>
   </section>
@@ -17,10 +40,6 @@
     <a class="action" routerLink="/tips">
       <i class="fas fa-lightbulb"></i>
       <span>건강 조언 보기</span>
-    </a>
-    <a class="action" routerLink="/">
-      <i class="fas fa-undo-alt"></i>
-      <span>처음으로</span>
     </a>
   </section>
 </main>
