@@ -1,11 +1,35 @@
+h1 {
+  text-align: center;
+  font-size: 1.5em;
+}
+
 .fixed-bg {
-  display: fixed;
-  z-index: 0;
+  position: absolute;
+  z-index: -1;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  div {
+    flex: 0 0 600px;
+    width: 600px;
+    height: 600px;
+    display: flex;
+    img {
+      margin: auto;
+    }
+  }
 }
 
 :host::ng-deep {
   .swiper {
     overflow: initial;
+    margin-bottom: calc(1em + 10px);
   }
   .swiper-wrapper {
     overflow: hidden;
@@ -17,7 +41,7 @@
   }
   .swiper-pagination {
     top: 100%;
-    margin-top: 0.5em;
+    margin-top: 10px;
     bottom: auto;
   }
   .swiper-button-prev {
@@ -30,4 +54,8 @@
     margin-left: 0.5em;
     right: auto;
   }
+}
+
+.actions {
+  margin-top: 2em;
 }

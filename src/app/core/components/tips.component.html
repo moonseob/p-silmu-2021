@@ -1,7 +1,14 @@
 <div class="fixed-bg">
-
+  <div>
+    <img src="assets/images/reaper.png">
+  </div>
+  <div></div>
+  <div>
+    <img src="assets/images/reaper.png">
+  </div>
 </div>
 <main>
+  <h1>심장마비를 예방하려면?</h1>
   <swiper
     [navigation]="true"
     [pagination]="{
@@ -26,13 +33,11 @@
     >
       <img [src]="src">
     </ng-template>
-    <!-- <ng-template swiperSlide>
-      <img src="assets/images/tips/001.png">
-    </ng-template>
-    <ng-template swiperSlide>
-      <img src="assets/images/tips/002.png">
-    </ng-template> -->
   </swiper>
-  <!-- <button class="swiper-button prev" (click)="prev()"></button>
-  <button class="swiper-button next" (click)="next()"></button> -->
+  <section class="actions">
+    <a routerLink="/" class="action">
+      <i class="fas fa-undo-alt"></i>
+      <span>첫화면으로</span>
+    </a>
+  </section>
 </main>
