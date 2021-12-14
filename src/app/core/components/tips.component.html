@@ -1,1 +1,38 @@
-<p>tips works!</p>
+<div class="fixed-bg">
+
+</div>
+<main>
+  <swiper
+    [navigation]="true"
+    [pagination]="{
+      type: 'fraction'
+    }"
+    [grabCursor]="true"
+    [effect]="'creative'"
+    [creativeEffect]="{
+      prev: {
+        shadow: true,
+        translate: ['-20%', 0, -1]
+      },
+      next: {
+        translate: ['100%', 0, 0]
+      }
+    }"
+  >
+    <ng-template
+      *ngFor="let src of assetSrcs"
+      class="slide"
+      swiperSlide
+    >
+      <img [src]="src">
+    </ng-template>
+    <!-- <ng-template swiperSlide>
+      <img src="assets/images/tips/001.png">
+    </ng-template>
+    <ng-template swiperSlide>
+      <img src="assets/images/tips/002.png">
+    </ng-template> -->
+  </swiper>
+  <!-- <button class="swiper-button prev" (click)="prev()"></button>
+  <button class="swiper-button next" (click)="next()"></button> -->
+</main>

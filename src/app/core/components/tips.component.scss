@@ -1,0 +1,33 @@
+.fixed-bg {
+  display: fixed;
+  z-index: 0;
+}
+
+:host::ng-deep {
+  .swiper {
+    overflow: initial;
+  }
+  .swiper-wrapper {
+    overflow: hidden;
+    width: 600px;
+    height: 600px;
+  }
+  .swiper-slide img {
+    width: 100%;
+  }
+  .swiper-pagination {
+    top: 100%;
+    margin-top: 0.5em;
+    bottom: auto;
+  }
+  .swiper-button-prev {
+    left: auto;
+    right: 100%;
+    margin-right: 0.5em;
+  }
+  .swiper-button-next {
+    left: 100%;
+    margin-left: 0.5em;
+    right: auto;
+  }
+}

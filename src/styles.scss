@@ -2,6 +2,11 @@
 /* Neo둥근모 */
 @import url("//cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@1.521/neodgm/style.css");
 
+@import "~swiper/css";
+@import "~swiper/css/pagination";
+@import "~swiper/css/navigation";
+@import "~swiper/css/effect-creative";
+
 $bg: black;
 $text: white;
 
@@ -118,4 +123,9 @@ p {
   .action ~ .action {
     margin-left: calc(20% / 3);
   }
+}
+
+// swiper overrides
+:root {
+  --swiper-theme-color: white;
 }

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { SwiperModule } from 'swiper/angular';
 import { TipsComponent } from './components/tips.component';
 import { IntroComponent } from './containers/intro.component';
 import { QuestionsComponent } from './containers/questions.component';
@@ -20,6 +21,7 @@ import { TextSeqDirective } from './services/text-seq.directive';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    SwiperModule,
     RouterModule.forRoot([
       {
         path: '',
